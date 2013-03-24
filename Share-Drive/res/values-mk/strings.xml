@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Сподели Возење</string>
+    <string name="menu_settings">Опции</string>
+    <string name="title_activity_main">Главно</string>
+    <string name="title_activity_list_view">Листа</string>
+    <string name="title_activity_register">Регистрација</string>
+    <string name="action_settings">Опции</string>
+    <string name="login">Логирање</string>
+    <string name="username">Корисничко име</string>
+    <string name="enter_your_username">Внеси корисничко име</string>
+    <string name="password">Лозинка</string>
+    <string name="enter_your_password">Внеси лозинка</string>
+    <string name="register">Регистрирај се</string>
+    <string name="retype_your_password">Внеси ја повторно лозинката</string>
+    <string name="name_and_surname">Име и презиме</string>
+    <string name="birthday">Година на рагање</string>
+    <string name="first_and_second_name">Име и Презиме</string>
+    
+    <string name="ptr_pull_to_refresh">Завлечи за освежуваење</string>
+    <string name="ptr_release_to_refresh">Завлечи за освежуваење</string>
+    <string name="ptr_refreshing">Освежување</string>
+    <string name="ptr_last_updated">Освежено на: %1$s</string>
+
+</resources>

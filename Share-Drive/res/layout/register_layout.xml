@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/radialback"
+    tools:context=".Register"
+    android:orientation="vertical"
+    android:gravity="center" >
+
+      <TextView
+        android:textSize="@dimen/login_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dip"
+        android:text="@string/register"
+        android:textColor="#FFF" />
+      
+    <EditText
+        android:id="@+id/register_etNameSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_name_surname"
+        android:hint="@string/first_and_second_name" />
+      
+        <TextView
+        style="@android:style/TextAppearance.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/birthday"
+        android:textColor="#FFF" />
+
+        <Spinner
+            android:id="@+id/register_ddlYears"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            
+ />
+
+    <EditText
+        android:id="@+id/register_etUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_username"
+        android:hint="@string/enter_your_username" />
+    
+    <EditText
+        android:id="@+id/register_etPassword"
+        android:inputType="textPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_password"
+        android:hint="@string/enter_your_password" />
+     <EditText
+        android:id="@+id/register_etRePassword"
+        android:inputType="textPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_password"
+        
+        android:hint="@string/retype_your_password" />
+
+    <ImageView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_btnRegister"
+        android:src="@drawable/button_register" />
+      
+
+</LinearLayout>
