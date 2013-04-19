@@ -3,7 +3,6 @@ package com.droiddnamk.sharedrive;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -81,20 +80,9 @@ public class StartupActivity extends Activity {
 				e.printStackTrace();
 			}
 			// Registracija i logirajne za ponatamu
-			//shared format - "username###password###auto(1/0)"
-			Intent i;
-			SharedPreferences shared = StartupActivity.this
-					.getSharedPreferences("shared_login", MODE_PRIVATE);
-			String s = shared.getString("shared_login_key", "");
-			if (s.length() > 0) {
-				i = new Intent(mContext, LoginActivity.class);
-				
-			} else {
-				i = new Intent(mContext, RegisterActivity.class);
-			}
+			Intent i = new Intent(mContext, ListView.class);
 			startActivity(i);
-			overridePendingTransition(R.anim.slide_in_right,
-					R.anim.slide_out_right);
+			overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_right );
 			finish();
 		}
 
