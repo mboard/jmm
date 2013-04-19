@@ -65,5 +65,12 @@
         android:id="@+id/register_btnRegister"
         android:src="@drawable/button_register" />
       
-
+        <TextView
+        style="@android:style/TextAppearance.Small"
+        android:id="@+id/txtGoToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="Go to Login Page"
+        android:textColor="#FFF" />
 </LinearLayout>

@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lib="http://schemas.android.com/apk/res/eu.erikw"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/transparent"
+    tools:context=".MainActivity" >
+
+    <include
+        android:id="@+id/actionBarMenu"
+        layout="@layout/actionbar_menu" />
+
+    <ListView 
+        android:id="@+id/listMenu"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actionBarMenu"
+        android:background="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:fadingEdge="none">
+        <!-- android:listSelector="@drawable/list_selector" -->
+         
+    </ListView>
+
+    <RelativeLayout
+        android:id="@+id/layoutToMove"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/actionBar"
+        android:background="#FFFFFF" >
+
+        <include
+            android:id="@+id/actionBar"
+            layout="@layout/actionbar_layout" />
+
+        <ImageButton
+            android:id="@+id/menuButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignBottom="@+id/actionBar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:onClick="openCloseMenu"
+            android:src="@drawable/menu" />
+
+        <Button
+            android:id="@+id/separator"
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/menuButton"
+            android:background="@drawable/custom_button_black" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/actionBar"
+            android:background="@drawable/radialback" >
+
+            <LinearLayout
+                android:id="@+id/layoutToHide"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@+id/actionBar"
+                android:background="@android:color/transparent" >
+
+                <eu.erikw.PullToRefreshListView
+                    android:id="@+id/pull_to_refresh_listview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/radialback"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:divider="@drawable/dislike"
+                    android:dividerHeight="1sp"
+                    android:listSelector="@android:color/transparent"
+                    android:paddingTop="10dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,21 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:gravity="center" >
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical" >
     
-    <ImageView 
-        android:layout_width="150dip"
-        android:layout_height="150dip"
-        android:src="@drawable/no_image"
-        android:id="@+id/custom_img"      />
-    <TextView 
+    <ImageView android:id="@+id/custom_img_vehicleType"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="5dip"
+        />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/background_light"
-        android:id="@+id/custom_text"
-        />
+        android:text="From Country" />
+
+    <TextView
+        android:id="@+id/custom_row_fromCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From Address" />
+
+    <TextView
+        android:id="@+id/custom_row_fromAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To Country" />
+
+    <TextView
+        android:id="@+id/custom_row_toCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To Address" />
+
+    <TextView
+        android:id="@+id/custom_row_toAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
