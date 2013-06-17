@@ -42,7 +42,7 @@ public class PersonalInfoActivity extends Activity implements OnClickListener {
 	// rest
 	EditText etNameSurname, etUsername, etPassword,etEmail;
 	TextView txtGoToAdvanced;
-	ImageView btnUpdate;
+	public static ImageView btnUpdate;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +91,7 @@ public class PersonalInfoActivity extends Activity implements OnClickListener {
 			switch (arg0.getId()) {
 
 			case R.id.personal_btnUpdate:
+				btnUpdate.setEnabled(false);
 				String[] params = new String[5];
 				params[0] = etNameSurname.getText().toString();
 				params[1] = etUsername.getText().toString();

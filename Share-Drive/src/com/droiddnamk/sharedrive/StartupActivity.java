@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -14,11 +15,34 @@ import android.widget.LinearLayout;
 public class StartupActivity extends Activity {
 
 	Handler handler = new Handler();
+	String speed;
+	int speed2 = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_startup);
+		SharedPreferences shared = getSharedPreferences("shared_speed",
+				MODE_PRIVATE);
+		speed = shared.getString("shared_speed_key", "On");
+		if (speed.equalsIgnoreCase("Off")) {
+			/*Intent i;
+			shared = StartupActivity.this.getSharedPreferences("shared_login",
+					MODE_PRIVATE);
+			String s = shared.getString("shared_login_key", "");
+			if (s.length() > 0) {
+				i = new Intent(this, LoginActivity.class);
+
+			} else {
+				i = new Intent(this, RegisterActivity.class);
+			}
+			startActivity(i);
+			finish();*/
+			speed2 = 0;
+			//return;
+		} else
+			speed2 = 1;
 		StartAnimations();
 		startAppAfterActivity ac = new startAppAfterActivity(this);
 
@@ -31,7 +55,7 @@ public class StartupActivity extends Activity {
 				StartToRightAnimation();
 
 			}
-		}, 4500);
+		}, (4500 * speed2));
 
 		// vo isto vreme nitkata spie 9 sekundi (5sek za prvite 2 animacii, i 4
 		// za poslednata koga ode na levo pa sa startuve noavto aktiviti...
@@ -75,26 +99,24 @@ public class StartupActivity extends Activity {
 		public void run() {
 			super.run();
 			try {
-				sleep(secounds * 1000);
+				sleep((secounds * 1000) * speed2);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// Registracija i logirajne za ponatamu
-			//shared format - "username###password###auto(1/0)"
+			// shared format - "username###password###auto(1/0)"
 			Intent i;
 			SharedPreferences shared = StartupActivity.this
 					.getSharedPreferences("shared_login", MODE_PRIVATE);
 			String s = shared.getString("shared_login_key", "");
 			if (s.length() > 0) {
 				i = new Intent(mContext, LoginActivity.class);
-				
+
 			} else {
 				i = new Intent(mContext, RegisterActivity.class);
 			}
 			startActivity(i);
-			overridePendingTransition(R.anim.slide_in_right,
-					R.anim.slide_out_right);
 			finish();
 		}
 

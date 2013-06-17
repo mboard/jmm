@@ -3,11 +3,14 @@ package com.droiddnamk.sharedrive;
 import java.text.SimpleDateFormat;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -17,11 +20,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.droiddnamk.sharedrive.StaticData.Singelton;
 import com.droiddnamk.sharedrive.swipemenu.MenuEventController;
 import com.droiddnamk.sharedrive.swipemenu.MenuLazyAdapter;
 import com.droiddnamk.sharedrive.swipemenu.OnSwipeTouchListener;
+import com.droiddnamk.sharedrive.webcommunication.getPersonLocation;
 import com.droiddnamk.sharedrive.webcommunication.getTrips;
 import com.droiddnamk.sharedrive.webcommunication.updateTripService;
 import com.droiddnamk.sharedrive.webcommunication.updateTripsBroadcast;
@@ -36,11 +39,12 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	public static final String ICON = "icon";
 	public static final String TITLE = "title";
 	public static final String DESCRIPTION = "description";
-	public static String logged_username, logged_password;
+	public static String logged_id,logged_username, logged_password,cur_city,cur_country,cur_city_id,cur_country_id;
 	private RelativeLayout layout;
 	private LinearLayout layout2;
 	private MenuLazyAdapter menuAdapter;
 	private boolean open = false;
+	public static boolean isActivityRunning;
 
 	private final Context context = this;
 
@@ -67,9 +71,17 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			broadcastIntent = new IntentFilter(BROADCAST_ACTION);
 			receiver = new updateTripsBroadcast();
 		}
-		
+		adapter.notifyDataSetChanged();
+
 		registerReceiver(receiver, broadcastIntent);
+		SharedPreferences shared = getSharedPreferences("shared_speed",MODE_PRIVATE);
+		String speed = shared.getString("shared_speed_key", "On");
+		menuAdapter.updateSpeedTitle(4, "Splash Screen ( " + speed + " )");	
+		menuAdapter.notifyDataSetChanged();
 		
+		isActivityRunning = true;
+		startService(service);
+		//Toast.makeText(this, "Nov grad i drzava = " + MainActivity.cur_city + " ; " + MainActivity.cur_country, Toast.LENGTH_LONG).show();
 	}
 	
 	
@@ -93,8 +105,10 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		// listView.setTextPullToRefresh("Pull to Refresh");
 		// listView.setTextReleaseToRefresh("Release to Refresh");
 		// listView.setTextRefreshing("Refreshing");
-		
+		new getPersonLocation(this).execute();
 		new getTrips(this).execute();
+
+		
 		startService(service);
 
 		listView.setOnRefreshListener(new OnRefreshListener() {
@@ -117,7 +131,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(this);
-
 		initializeSwipe_Menu();
 	}
 
@@ -211,10 +224,45 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	}
 	
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+	protected void onPause() {
+		super.onPause();
 		stopService(service);
 		unregisterReceiver(receiver);
+		isActivityRunning = false;
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		//
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			AlertDialog.Builder adb = new AlertDialog.Builder(
+					MainActivity.this);
+			adb.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					MainActivity.this.finish();
+				}
+			});
+
+			adb.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					dialog.cancel();
+				}
+			});
+
+			AlertDialog dialog = adb.create();
+			dialog.setTitle("Closing application");
+			dialog.setMessage("Are you sure?");
+			dialog.show();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 }

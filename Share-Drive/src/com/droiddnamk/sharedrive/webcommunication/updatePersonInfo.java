@@ -17,6 +17,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.droiddnamk.sharedrive.JSONParser;
+import com.droiddnamk.sharedrive.PersonalInfoActivity;
 
 public class updatePersonInfo extends AsyncTask<String, String, String> {
 	String name, password, email;
@@ -102,7 +103,7 @@ public class updatePersonInfo extends AsyncTask<String, String, String> {
 				Toast.makeText(mContext, "Error, Try again later!",
 						Toast.LENGTH_LONG).show();
 			}
-
+			PersonalInfoActivity.btnUpdate.setEnabled(true);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

@@ -17,7 +17,9 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.droiddnamk.sharedrive.AdvancedInfoActivity;
 import com.droiddnamk.sharedrive.JSONParser;
+import com.droiddnamk.sharedrive.MainActivity;
 
 public class updateTripService extends Service {
 	public static final String PREF_UPDATE = "UpdatePrefs";
@@ -29,7 +31,6 @@ public class updateTripService extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -90,7 +91,7 @@ public class updateTripService extends Service {
 					now = json.getInt("max");
 
 					
-
+					Log.e("Checking in Servive"," now = "+now + " previous = "+previous);
 					if (now > previous) {
 						Editor editor = prefs.edit();
 						editor.putInt(PREF_LAST_ID, now);
@@ -119,7 +120,9 @@ public class updateTripService extends Service {
 			super.run();
 
 			while (isRunning) {
+				if(MainActivity.isActivityRunning == true)
 				new CheckNew(getBaseContext()).execute();
+				
 				try {
 					//Thread.sleep(minutes * 60 *1000);
 					Thread.sleep(10000);

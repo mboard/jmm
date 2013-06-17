@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.Display;
 import android.view.View;
@@ -79,7 +80,7 @@ public class MenuEventController {
 		menuArray = new ArrayList<HashMap<String, Object>>();
 		MenuConfigAdapter mca = new MenuConfigAdapter();
 		
-		List<Menu> listItemMenu = mca.getMenuDefault();
+		List<Menu> listItemMenu = mca.getMenuDefault((Activity)context);
 
 		for(int i = 0; i < listItemMenu.size(); i++){
 			HashMap<String, Object> map = new HashMap<String, Object>();

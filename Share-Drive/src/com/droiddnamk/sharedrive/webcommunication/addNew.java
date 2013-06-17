@@ -24,13 +24,9 @@ public class addNew extends AsyncTask<String, String, Void> {
 	JSONParser jParser = new JSONParser();
 	JSONObject json;
 	JSONArray products = null;
-	ProgressDialog dialog;
-	Context mContext;
 	int previous,now;
 
-	public addNew(Context context,int n,int p) {
-		mContext = context;
-		dialog = new ProgressDialog(context);
+	public addNew(int n,int p) {
 		now = n;
 		previous = p;
 	}
@@ -68,7 +64,10 @@ public class addNew extends AsyncTask<String, String, Void> {
 
 					String id = c.getString("id");
 					String user_id = c.getString("user_id");
-					String city = c.getString("city");
+					String user = c.getString("user");
+					String from_city_id = c.getString("from_city_id");
+					String from_country_id = c.getString("from_country_id");					
+					String from_city = c.getString("from_city");
 					String from_country = c.getString("from_country");
 					String from = c.getString("from");
 					String to = c.getString("to");
@@ -80,10 +79,18 @@ public class addNew extends AsyncTask<String, String, Void> {
 					String payment_type = c.getString("payment_type");
 					String status = c.getString("status");
 					String to_country = c.getString("to_country");
-					
-					Log.e("TAG","CITY: "+city);
-					
-					Trip temp = new Trip(id, user_id, city, from_country, from, to, vehicle_type, from_time, to_time, no_passangers, cur_passangers, payment_type, status, to_country);
+					String to_city = c.getString("to_city");
+					String to_country_id = c.getString("to_country_id");
+					String to_city_id = c.getString("to_city_id");		
+					String availible_passangers = c.getString("availible_passangers");
+					String no_likes = c.getString("no_likes");
+					String no_dislikes = c.getString("no_dislikes");		
+					String phone_number = c.getString("phone_number");
+					//Log.e("TAG","CITY: "+city);
+					//Log.e("TAG","CITY: "+city);
+					if(user.equals("null")) return;
+					Trip temp = new Trip(id, user_id, from_city, from_country, from, to, vehicle_type, from_time, to_time, no_passangers, cur_passangers, payment_type, status, to_country,to_city,
+							from_city_id,from_country_id,to_country_id,to_city_id,user,availible_passangers,no_likes,no_dislikes,phone_number,"");
 					if(Singelton.getInstance().getTrips().isDuplicate(temp))
 					Singelton.getInstance().getTrips().addTrip(temp);
 				}

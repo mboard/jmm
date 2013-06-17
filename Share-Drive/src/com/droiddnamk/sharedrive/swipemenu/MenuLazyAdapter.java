@@ -25,11 +25,13 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.droiddnamk.sharedrive.CreateTrip;
 import com.droiddnamk.sharedrive.Enkripcija;
 import com.droiddnamk.sharedrive.LoginActivity;
 import com.droiddnamk.sharedrive.MainActivity;
 import com.droiddnamk.sharedrive.PersonalInfoActivity;
 import com.droiddnamk.sharedrive.R;
+import com.droiddnamk.sharedrive.StartupActivity;
 import com.droiddnamk.sharedrive.webcommunication.getPersonInfo;
 
 /**
@@ -39,6 +41,7 @@ import com.droiddnamk.sharedrive.webcommunication.getPersonInfo;
  */
 public class MenuLazyAdapter extends BaseAdapter {
 
+	protected static final int MODE_PRIVATE = 0;
 	private Activity activity;
 	HashMap<String, Object> menuConfig;
 	private ArrayList<HashMap<String, Object>> data;
@@ -60,6 +63,19 @@ public class MenuLazyAdapter extends BaseAdapter {
 		int i = 0;
 		for (HashMap<String, Object> hashMap : data) {
 			if (hashMap.get("id").toString().equals("8")) {
+				menuConfig2 = data.get(i);
+				menuConfig2.put("title", new_title);
+				data.set(i, menuConfig2);
+			}
+			i++;
+		}
+	}
+
+	public void updateSpeedTitle(int id, String new_title) {
+		HashMap<String, Object> menuConfig2 = new HashMap<String, Object>();
+		int i = 0;
+		for (HashMap<String, Object> hashMap : data) {
+			if (hashMap.get("id").toString().equals("4")) {
 				menuConfig2 = data.get(i);
 				menuConfig2.put("title", new_title);
 				data.set(i, menuConfig2);
@@ -186,6 +202,27 @@ public class MenuLazyAdapter extends BaseAdapter {
 								"You have no internet connection",
 								Toast.LENGTH_SHORT).show();
 					}
+				}
+				if (data.get(position).get("id").toString()
+						.equalsIgnoreCase("4")) {
+					SharedPreferences shared = activity.getSharedPreferences(
+							"shared_speed", MODE_PRIVATE);
+					String speed = shared.getString("shared_speed_key", "On");
+					if (speed.equalsIgnoreCase("On"))
+						speed = "Off";
+					else
+						speed = "On";
+					updateSpeedTitle(4, "Splash Screen ( " + speed + " )");
+					Editor editor = shared.edit();
+					editor.putString("shared_speed_key", speed);
+					editor.commit();
+					notifyDataSetChanged();
+				}
+				if (data.get(position).get("id").toString()
+						.equalsIgnoreCase("2")) {
+					Intent m = new Intent(activity,CreateTrip.class);
+					activity.startActivity(m);
+					
 				}
 			}
 		});

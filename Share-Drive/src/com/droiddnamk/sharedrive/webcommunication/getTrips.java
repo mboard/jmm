@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +15,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.droiddnamk.sharedrive.JSONParser;
+import com.droiddnamk.sharedrive.MainActivity;
 import com.droiddnamk.sharedrive.StaticData.Singelton;
 import com.droiddnamk.sharedrive.customClasses.Trip;
 
@@ -36,7 +38,7 @@ public class getTrips extends AsyncTask<String, String, Void> {
 		try {
 
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-
+			params.add(new BasicNameValuePair("user_id", MainActivity.logged_id));
 			json = jParser.makeHttpRequest(url, "POST", params);
 			Log.d("vo getTrips -> doInBackground ", json.toString());
 
@@ -62,10 +64,13 @@ public class getTrips extends AsyncTask<String, String, Void> {
 
 					String id = c.getString("id");
 					String user_id = c.getString("user_id");
-					String city = c.getString("city");
+					String user = c.getString("user");
+					String from_city_id = c.getString("from_city_id");
+					String from_country_id = c.getString("from_country_id");					
+					String from_city = c.getString("from_city");
 					String from_country = c.getString("from_country");
-					String from = c.getString("from");
-					String to = c.getString("to");
+					String from = c.getString("from_address"); 
+					String to = c.getString("to_address");
 					String vehicle_type = c.getString("vehicle_type");
 					String from_time = c.getString("from_time");
 					String to_time = c.getString("to_time");
@@ -74,10 +79,18 @@ public class getTrips extends AsyncTask<String, String, Void> {
 					String payment_type = c.getString("payment_type");
 					String status = c.getString("status");
 					String to_country = c.getString("to_country");
+					String to_city = c.getString("to_city");
+					String to_country_id = c.getString("to_country_id");
+					String to_city_id = c.getString("to_city_id");				
+					String availible_passangers = c.getString("availible_passangers");
+					String no_likes = c.getString("no_likes");
+					String no_dislikes = c.getString("no_dislikes");		
+					String phone_number = c.getString("phone_number");
+					String status2 = c.getString("status2");
+					//Log.e("TAG","CITY: "+city);
 					
-					Log.e("TAG","CITY: "+city);
-					
-					Trip temp = new Trip(id, user_id, city, from_country, from, to, vehicle_type, from_time, to_time, no_passangers, cur_passangers, payment_type, status, to_country);
+					Trip temp = new Trip(id, user_id, from_city, from_country, from, to, vehicle_type, from_time, to_time, no_passangers, cur_passangers, payment_type, status, to_country,to_city,
+							from_city_id,from_country_id,to_country_id,to_city_id,user,availible_passangers,no_likes,no_dislikes,phone_number,status2);
 					if(Singelton.getInstance().getTrips().isDuplicate(temp))
 					Singelton.getInstance().getTrips().addTrip(temp);
 				}

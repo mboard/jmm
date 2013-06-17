@@ -16,7 +16,7 @@ public class updateTripsBroadcast extends BroadcastReceiver{
 		now = prefs.getInt(updateTripService.PREF_LAST_ID, -1);
 		previous = prefs.getInt(updateTripService.PREF_PREVIOUS_ID, 0);
 		
-		new addNew(context, now,previous).execute();
+		new addNew(now,previous).execute();
 
 	}
 

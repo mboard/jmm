@@ -22,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -38,11 +39,12 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	// rest
 	EditText etNameSurname, etUsername, etPassword, etRePassword;
 	TextView txtGoToLogin;
-	ImageView btnRegister;
+	public ImageView btnRegister;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.register_layout);
 		setUpYears();
 		initialize();
@@ -98,6 +100,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			switch (arg0.getId()) {
 
 			case R.id.register_btnRegister:
+				btnRegister.setEnabled(false);
 				String[] params = new String[4];
 				params[0] = etNameSurname.getText().toString();
 				params[1] = etUsername.getText().toString();
@@ -112,6 +115,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 				startActivity(i);
 				overridePendingTransition(R.anim.slide_in_right,
 						R.anim.slide_out_right);
+				finish();
 
 			}
 		} else
@@ -221,7 +225,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 					Toast.makeText(mContext, "Error, try again!",
 							Toast.LENGTH_LONG).show();
 				}
-
+				btnRegister.setEnabled(true);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

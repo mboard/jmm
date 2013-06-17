@@ -24,6 +24,7 @@
 
     <EditText
         android:id="@+id/main_etUsername"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/icon_username"
@@ -38,6 +39,7 @@
 
     <EditText
         android:id="@+id/main_etPassword"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/icon_password"

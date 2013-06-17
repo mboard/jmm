@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.droiddnamk.sharedrive"
     android:versionCode="1"
-    android:versionName="1.0"
-     >
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -11,52 +10,76 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-         >
+        android:theme="@style/AppTheme" >
         <activity
-            android:launchMode="singleInstance"
             android:name="com.droiddnamk.sharedrive.StartupActivity"
-            android:label="@string/app_name" >
-             <intent-filter>
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-           
         </activity>
         <activity
             android:name="com.droiddnamk.sharedrive.LoginActivity"
-            android:label="@string/title_activity_main" >
-            
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.droiddnamk.sharedrive.PersonalInfoActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.droiddnamk.sharedrive.MainActivity"
-            android:label="@string/title_activity_list_view" >
+            android:label="@string/title_activity_list_view"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.droiddnamk.sharedrive.RegisterActivity"
-            android:label="@string/title_activity_register" >
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.droiddnamk.sharedrive.TestActivity"
-            android:label="Test" >
+            android:label="Test"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.droiddnamk.sharedrive.AdvancedInfoActivity"
-            android:label="@string/title_activity_advanced_info" >
+            android:label="@string/title_activity_advanced_info"
+            android:screenOrientation="portrait" >
         </activity>
-        <service android:name="com.droiddnamk.sharedrive.webcommunication.updateTripService"></service>
-        <receiver android:name="com.droiddnamk.sharedrive.webcommunication.updateTripsBroadcast"></receiver>
+
+        <service android:name="com.droiddnamk.sharedrive.webcommunication.updateTripService" >
+        </service>
+
+        <receiver android:name="com.droiddnamk.sharedrive.webcommunication.updateTripsBroadcast" >
+        </receiver>
+		
+        <activity android:name=".CreateTrip">
+        </activity>
+        
+        <activity
+            android:name="com.droiddnamk.sharedrive.CreateTripFrom"
+            android:label="@string/title_activity_create_trip_from" >
+        </activity>
+        <activity
+            android:name="com.droiddnamk.sharedrive.CreateTripTo"
+            android:label="@string/title_activity_create_trip_to" >
+        </activity>
+        <activity
+            android:name="com.droiddnamk.sharedrive.CreateTripExtra"
+            android:label="@string/title_activity_create_trip_extra" >
+        </activity>
     </application>
 
 </manifest>

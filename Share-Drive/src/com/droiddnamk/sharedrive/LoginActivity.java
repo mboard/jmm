@@ -22,11 +22,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.droiddnamk.sharedrive.customClasses.Countries;
+import com.droiddnamk.sharedrive.webcommunication.GetMessageSender;
 
 /*
  * 			LOGIN PAGE NOT MAIN!
@@ -37,12 +41,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 	EditText etUsername, etPassword;
 	CheckBox chkRememberPass;
 	TextView txtGoToRegister;
-	ImageView btnLogin;
+	public static ImageView btnLogin;
 	public static String credentials = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login_layout);
 		initialize();
 		chkRememberPass.setChecked(true);
@@ -103,6 +108,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		if (isNetworkAvailable()) {
 			switch (arg0.getId()) {
 			case R.id.main_btnLogin:
+				btnLogin.setEnabled(false);
 				String[] params = new String[2];
 				params[0] = etUsername.getText().toString();
 				params[1] = etPassword.getText().toString();
@@ -159,13 +165,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 			pDialog.setMessage("Sending data...");
 			pDialog.setCancelable(false);
 			pDialog.show();
-
 		}
 
 		@Override
 		protected String doInBackground(String... arg0) {
 			try {
-
+				GetMessageSender gms = new GetMessageSender();
+				String data = gms.sendMessage("http://www.ristokalinikov.mk/sharedrive/getCountries.php");
+				Log.e("data Countries->",data);
+				Countries.LoadCountries(data);
+				
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("username", "" + arg0[0]));
 				params.add(new BasicNameValuePair("password", "" + arg0[1]));
@@ -188,7 +197,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			try {
 				pDialog.dismiss();
 				int success = json.getInt("success");
-				if (success == 1) {
+				if (success > 0) {
 					Toast.makeText(mContext, "Successful login",
 							Toast.LENGTH_SHORT).show();
 					int tmp_auto = 0;
@@ -208,6 +217,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 					Editor editor = shared.edit();
 					editor.putString("shared_login_key", s);
 					editor.commit();
+					MainActivity.logged_id = success+"";
 					MainActivity.logged_username = etUsername.getText()
 							.toString();
 					MainActivity.logged_password = etPassword.getText()
@@ -223,6 +233,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 							"Error, inccorect username or password!",
 							Toast.LENGTH_LONG).show();
 				}
+				
+				btnLogin.setEnabled(true);
 
 			} catch (JSONException e) {
 				e.printStackTrace();

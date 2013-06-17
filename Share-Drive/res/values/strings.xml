@@ -23,5 +23,32 @@
     <string name="ptr_refreshing">Refreshing</string>
     <string name="ptr_last_updated">Updated: %1$s</string>
     <string name="title_activity_advanced_info">AdvancedInfoActivity</string>
+    <string name="enter_your_city">Enter your city</string>
+    <string name="enter_your_state">Enter your state</string>
+    <string name="_go_back">&lt;&lt; Go Back</string>
+    <string name="country"><u>Country</u></string>
+    <string name="city"><u>City</u></string>
+    <string name="title_activity_create_trip_from">CreateTripFrom</string>
+    <string name="title_activity_create_trip_to">CreateTripTo</string>
+    <string name="title_activity_create_trip_extra">CreateTripExtra</string>
+    <string name="enter_destination_address">Enter destination address</string>
+    <string name="enter_start_address">Enter start address</string>
+
+    <string-array name="trip_vehicles">
+        <item>Car</item>
+        <item>Van</item>
+        <item>Motor</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="trip_payments">
+        <item>Free</item>
+        <item>Paid</item>
+    </string-array>
+    <string-array name="trip_status">
+        <item>Active</item>
+        <item>Finished</item>
+        <item>Closed</item>
+        <item>Cancelled</item>
+    </string-array>
 
 </resources>
